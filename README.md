@@ -58,7 +58,12 @@ Reflect on what you’ve done so far. How’s it going? Are you feeling behind/a
 What has surprised you so far? Describe your general feelings. Be honest with yourself; this section is for you, not me.
 
 ```
-    **Replace this text with your reflection
+    I've started creathing the objects I'm going to need for my video games. I have some of the methods laid out, that
+    just need to be filled in with code. I've also created a small unit test as well, I think I'm struggling on that a 
+    little bit. I am feeling ahead because I spent a lot of time coding and knowing what I want to do with my project.
+    I am worried about the unit test because I felt like I did that wrong. What surprised me so far is that I can add 
+    pictures of my choice to my video game. I am feeling really good about this project. I just need to keep working
+    on schedule and plan ahead to get more coding done.
 ```
 
 ---
