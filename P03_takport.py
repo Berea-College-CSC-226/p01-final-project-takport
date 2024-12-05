@@ -1,6 +1,7 @@
 import pygame
 import random
 import sys
+import os
 
 # Initialize Pygame
 pygame.init()
@@ -15,6 +16,8 @@ PLAYER_SPEED = 5
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+GRAY = (200, 200, 200)
 
 # Initialize the screen
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -34,7 +37,11 @@ except FileNotFoundError:
     car_width = 50
     car_height = 100
     car_image = pygame.Surface((car_width, car_height))
-    car_image.fill((0, 255, 0))  # Green rectangle placeholder
+    car_image.fill(GREEN)  # Green rectangle placeholder
+
+# Fonts for displaying text
+font = pygame.font.Font(None, 36)
+large_font = pygame.font.Font(None, 72)
 
 # Player (Car) Object
 player_x = SCREEN_WIDTH // 2 - car_width // 2
@@ -49,6 +56,50 @@ move_left = False
 move_right = False
 move_up = False
 move_down = False
+
+# Game Variables
+score = 0
+player_name = ""
+running = True
+leaderboard_file = "highscores.txt"
+
+# Ensure the highscores.txt file exists
+if not os.path.exists(leaderboard_file):
+    with open(leaderboard_file, "w") as file:
+        file.write("")  # Create an empty highscores.txt file
+
+
+def read_leaderboard():
+    """
+    Read the leaderboard from a file and return the top 5 scores with names as a list of tuples.
+    Handles empty or malformed lines gracefully.
+    """
+    if not os.path.exists(leaderboard_file):
+        return []  # Return an empty leaderboard if the file doesn't exist
+
+    scores = []
+    with open(leaderboard_file, "r") as file:
+        for line in file:
+            try:
+                name, score = line.strip().split(",")  # Split the line into name and score
+                scores.append((name, int(score)))      # Convert score to integer
+            except (ValueError, IndexError):
+                # Skip lines that are not properly formatted
+                continue
+
+    return sorted(scores, key=lambda x: x[1], reverse=True)[:5]
+
+
+def save_score(name, new_score):
+    """
+    Save a new score with the player's name to the leaderboard file.
+    """
+    scores = read_leaderboard()
+    scores.append((name, new_score))
+    scores = sorted(scores, key=lambda x: x[1], reverse=True)[:5]  # Keep only the top 5 scores
+    with open(leaderboard_file, "w") as file:
+        for name, score in scores:
+            file.write(f"{name},{score}\n")
 
 
 def spawn_obstacle():
@@ -117,12 +168,87 @@ def draw_game_objects():
         pygame.draw.rect(screen, RED, (obs["x"], obs["y"], obs["width"], obs["height"]))
 
 
+def display_score():
+    """
+    Display the current score and leaderboard on the screen.
+    """
+    # Display the current score
+    score_text = font.render(f"Score: {score}", True, WHITE)
+    screen.blit(score_text, (10, 10))
+
+    # Display the leaderboard
+    leaderboard = read_leaderboard()
+    y_offset = 50
+    for i, (name, high_score) in enumerate(leaderboard, start=1):
+        high_score_text = font.render(f"{i}. {name}: {high_score}", True, WHITE)
+        screen.blit(high_score_text, (10, y_offset))
+        y_offset += 30
+
+
+def display_name_input():
+    """
+    Display a text input box for the user to enter their name.
+    """
+    global player_name
+
+    input_box = pygame.Rect(SCREEN_WIDTH // 2 - 150, SCREEN_HEIGHT // 2 - 25, 300, 50)
+    active = True
+    color = GRAY
+
+    while active:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    active = False
+                elif event.key == pygame.K_BACKSPACE:
+                    player_name = player_name[:-1]
+                else:
+                    player_name += event.unicode
+
+        # Draw input box and name
+        screen.fill(BLACK)
+        pygame.draw.rect(screen, color, input_box)
+        text_surface = font.render(player_name, True, WHITE)
+        screen.blit(text_surface, (input_box.x + 10, input_box.y + 10))
+
+        prompt = font.render("Enter your name and press Enter:", True, WHITE)
+        screen.blit(prompt, (SCREEN_WIDTH // 2 - 200, SCREEN_HEIGHT // 2 - 80))
+
+        pygame.display.flip()
+        clock.tick(FPS)
+
+
+def display_game_over():
+    """
+    Display a game-over message and leaderboard.
+    """
+    screen.fill(BLACK)
+    game_over_text = large_font.render("Game Over!", True, WHITE)
+    screen.blit(game_over_text, (SCREEN_WIDTH // 2 - 150, SCREEN_HEIGHT // 2 - 50))
+
+    leaderboard = read_leaderboard()
+    y_offset = SCREEN_HEIGHT // 2 + 50
+    for i, (name, high_score) in enumerate(leaderboard, start=1):
+        high_score_text = font.render(f"{i}. {name}: {high_score}", True, WHITE)
+        screen.blit(high_score_text, (SCREEN_WIDTH // 2 - 100, y_offset))
+        y_offset += 30
+
+    pygame.display.flip()
+    pygame.time.wait(5000)  # Wait 5 seconds before exiting
+
+
 # Game Functionality
 def game_loop():
-    global move_left, move_right, move_up, move_down, obstacles, running
+    global move_left, move_right, move_up, move_down, obstacles, running, score
 
     spawn_timer = 0
     running = True
+    score = 0
+
     while running:
         # Handle events
         for event in pygame.event.get():
@@ -164,8 +290,12 @@ def game_loop():
         update_obstacles()
         handle_collision()
 
+        # Increase score over time
+        score += 1
+
         # Draw everything
         draw_game_objects()
+        display_score()
 
         # Update the display
         pygame.display.flip()
@@ -173,7 +303,11 @@ def game_loop():
         # Cap the frame rate
         clock.tick(FPS)
 
+    # Save the score and display a game-over screen
+    save_score(player_name, score)
+    display_game_over()
+
 
 # Run the game
+display_name_input()
 game_loop()
-

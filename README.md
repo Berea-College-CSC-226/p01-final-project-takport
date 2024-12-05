@@ -12,9 +12,9 @@
 ---
 
 ## References 
-Throughout this project, you have likely used outside resources. Reference all ideas which are not your own, 
-and describe how you integrated the ideas or code into your program. This includes online sources, people who have 
-helped you, AI tools you've used, and any other resources that are not solely your own contribution. Update as you go.
+https://dev.to/lovelacecoding/how-to-build-your-first-python-game-a-step-by-step-guide-to-creating-a-simple-shooter-with-pygame-f0k#:~:text=How%20to%20Build%20Your%20First%20Python%20Game%3A%20A,Enemies%20...%205%20Step%205%3A%20Detecting%20Collisions%20
+https://blog.devgenius.io/a-step-by-step-guide-to-creating-a-python-game-with-pygame-a-step-by-step-guide-to-creating-a-4c89f81fe7e0
+https://www.remove.bg/upload
 
 ---
 
@@ -27,14 +27,7 @@ helped you, AI tools you've used, and any other resources that are not solely yo
 ❗️**Source Assignment(s)**: `T11: The Legends of Tuna: Breath of Catnip, HW02: Loopy Turtles, Loopy Languages`
 
 ❗️**CRC Card(s)**:
-  - Create a CRC card for each class that your project will implement.
-  - See this link for a sample CRC card and a template to use for your own cards (you will have to make a copy to edit):
-    [CRC Card Example](https://docs.google.com/document/d/1JE_3Qmytk_JGztRqkPXWACJwciPH61VCx3idIlBCVFY/edit?usp=sharing)
-  - Tables in markdown are not easy, so we suggest saving your CRC card as an image and including the image(s) in the 
-    README. You can do this by saving an image in the repository and linking to it. See the sample CRC card below - 
-    and REPLACE it with your own:
-  
-![Don't leave me in your README!](![CRC Card-1.png](CRC%20Card-1.png)
+(![CRC Card-1.png](CRC%20Card-1.png)
 ![CRC Card-2.png](CRC%20Card-2.png)
 ![CRC Card-3.png](CRC%20Card-3.png)  
 
@@ -72,14 +65,19 @@ What has surprised you so far? Describe your general feelings. Be honest with yo
 
 Indicate what percentage of the project you have left to complete and how confident you feel. 
 
-❗️**Completion Percentage**: `0 - 100%`
+❗️**Completion Percentage**: `80%`
 
 ❗️**Confidence**: Describe how confident you feel about completing this project, and why. Then, describe some 
   strategies you can employ to increase the likelihood that you'll be successful in completing this project 
   before the deadline.
 
 ```
-    **Replace this text with your reflection
+    I feel very confident in completing this project, because I am having a fun time creating a game that I envisioned.
+    I am learning more as I progress through the project and understanding how some fundamental concepts work. With more
+    time in this project, I feel like I am becoming a better programmer and growing my confidence with coding. Some strategies
+    that I can employ to increase the likelihood of me being successful in completing the project before the deadline is creating 
+    a design and outline of my project, planning ahead, and having my code reviewed by my peers who could suggest feedback for me
+    to improve. I can also create a schedule for me to work on the code and unit test.
 ```
 
 ---
