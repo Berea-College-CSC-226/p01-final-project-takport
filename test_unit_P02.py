@@ -1,6 +1,5 @@
 import unittest
-from pygame import Rect
-from your_script_name import read_leaderboard, save_score, spawn_obstacle, update_obstacles
+from P02_takport import read_leaderboard, save_score, spawn_obstacle, update_obstacles
 
 # Test Constants
 SCREEN_WIDTH = 800

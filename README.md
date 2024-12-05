@@ -1,13 +1,13 @@
-# ❗CSC226 Final Project
+#   CSC226 Final Project
 
 ## Instructions
 
-❗️Exclamation Marks ❗️indicate action items; you should remove these emoji as you complete/update the items which 
+️Exclamation Marks ❗️indicate action items; you should remove these emoji as you complete/update the items which 
   they accompany. (This means that your final README should have no ❗️in it!)
 
-❗️**Author(s)**: Tobore Takpor
+️**Author(s)**: Tobore Takpor
 
-❗️**Google Doc Link**: https://docs.google.com/document/d/1GyYdQqHJCr5xH80ElDsX9l0mIo6yo7szI-a608zeVEY/edit?usp=sharing
+️**Google Doc Link**: https://docs.google.com/document/d/1GyYdQqHJCr5xH80ElDsX9l0mIo6yo7szI-a608zeVEY/edit?usp=sharing
 
 ---
 
@@ -20,18 +20,18 @@ https://www.remove.bg/upload
 
 ## Milestone 1: Setup, Planning, Design
 
-❗️**Title**: `NettSpend's Playhouse`
+️**Title**: `NettSpend's Playhouse`
 
-❗**Purpose**: `My project will run an interactive game that the user can play.`
+  **Purpose**: `My project will run an interactive game that the user can play.`
 
-❗️**Source Assignment(s)**: `T11: The Legends of Tuna: Breath of Catnip, HW02: Loopy Turtles, Loopy Languages`
+️**Source Assignment(s)**: `T11: The Legends of Tuna: Breath of Catnip, HW02: Loopy Turtles, Loopy Languages`
 
-❗️**CRC Card(s)**:
-(![CRC Card-1.png](CRC%20Card-1.png)
+️**CRC Card(s)**:
+![CRC Card-1.png](CRC%20Card-1.png)
 ![CRC Card-2.png](CRC%20Card-2.png)
 ![CRC Card-3.png](CRC%20Card-3.png)  
 
-❗️**Branches**: This project will **require** effective use of git. 
+️**Branches**: This project will **require** effective use of git. 
 
 Each partner should create a branch at the beginning of the project, and stay on this branch (or branches of their 
 branch) as they work. When you need to bring each others branches together, do so by merging each other's branches 
@@ -65,9 +65,9 @@ What has surprised you so far? Describe your general feelings. Be honest with yo
 
 Indicate what percentage of the project you have left to complete and how confident you feel. 
 
-❗️**Completion Percentage**: `80%`
+️**Completion Percentage**: `80%`
 
-❗️**Confidence**: Describe how confident you feel about completing this project, and why. Then, describe some 
+️**Confidence**: Describe how confident you feel about completing this project, and why. Then, describe some 
   strategies you can employ to increase the likelihood that you'll be successful in completing this project 
   before the deadline.
 
