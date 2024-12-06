@@ -39,6 +39,19 @@ except FileNotFoundError:
     car_image = pygame.Surface((car_width, car_height))
     car_image.fill(GREEN)  # Green rectangle placeholder
 
+# Load Truck Image for Obstacles
+try:
+    truck_image = pygame.image.load("truck.png")  # Replace with your truck image file path
+    truck_width = 60  # Adjust the truck size
+    truck_height = 100  # Adjust the truck size
+    truck_image = pygame.transform.scale(truck_image, (truck_width, truck_height))
+except FileNotFoundError:
+    print("Error: 'truck.png' not found. Using a red rectangle as a placeholder.")
+    truck_width = 60
+    truck_height = 100
+    truck_image = pygame.Surface((truck_width, truck_height))
+    truck_image.fill(RED)  # Red rectangle placeholder
+
 # Fonts for displaying text
 font = pygame.font.Font(None, 36)
 large_font = pygame.font.Font(None, 72)
@@ -68,7 +81,6 @@ if not os.path.exists(leaderboard_file):
     with open(leaderboard_file, "w") as file:
         file.write("")  # Create an empty highscores.txt file
 
-
 def read_leaderboard():
     """
     Read the leaderboard from a file and return the top 5 scores with names as a list of tuples.
@@ -76,7 +88,6 @@ def read_leaderboard():
     """
     if not os.path.exists(leaderboard_file):
         return []  # Return an empty leaderboard if the file doesn't exist
-
     scores = []
     with open(leaderboard_file, "r") as file:
         for line in file:
@@ -86,9 +97,7 @@ def read_leaderboard():
             except (ValueError, IndexError):
                 # Skip lines that are not properly formatted
                 continue
-
     return sorted(scores, key=lambda x: x[1], reverse=True)[:5]
-
 
 def save_score(name, new_score):
     """
@@ -101,14 +110,13 @@ def save_score(name, new_score):
         for name, score in scores:
             file.write(f"{name},{score}\n")
 
-
 def spawn_obstacle():
     """
-    Spawn a new obstacle. Randomly decides the side (left or right)
+    Spawn a new obstacle (truck). Randomly decides the side (left or right)
     and returns its position, size, and speed.
     """
-    obs_width = random.randint(20, 50)
-    obs_height = random.randint(20, 50)
+    obs_width = truck_width
+    obs_height = truck_height
     obs_y = random.randint(0, SCREEN_HEIGHT - obs_height)
     if random.choice([True, False]):  # Randomly choose the side
         obs_x = -obs_width  # Spawn off-screen on the left
@@ -118,7 +126,6 @@ def spawn_obstacle():
         direction = -1       # Move left
     obs_speed = random.randint(3, 7) * direction
     return {"x": obs_x, "y": obs_y, "width": obs_width, "height": obs_height, "speed": obs_speed}
-
 
 def update_player_position():
     """
@@ -134,7 +141,6 @@ def update_player_position():
     if move_down and player_rect.bottom < SCREEN_HEIGHT:
         player_rect.y += PLAYER_SPEED
 
-
 def handle_collision():
     """
     Check for collisions between the player and obstacles, and handle
@@ -147,7 +153,6 @@ def handle_collision():
             print("Collision detected! Game over!")
             running = False
 
-
 def update_obstacles():
     """
     Move obstacles sideways and remove any that are off-screen.
@@ -157,7 +162,6 @@ def update_obstacles():
         obs["x"] += obs["speed"]  # Move obstacle
     obstacles = [obs for obs in obstacles if 0 <= obs["x"] <= SCREEN_WIDTH]  # Remove off-screen obstacles
 
-
 def draw_game_objects():
     """
     Draw the player and obstacles on the screen.
@@ -165,8 +169,7 @@ def draw_game_objects():
     screen.fill(BLACK)  # Clear the screen
     screen.blit(car_image, (player_rect.x, player_rect.y))  # Draw player
     for obs in obstacles:  # Draw all obstacles
-        pygame.draw.rect(screen, RED, (obs["x"], obs["y"], obs["width"], obs["height"]))
-
+        screen.blit(truck_image, (obs["x"], obs["y"]))  # Draw truck image as obstacle
 
 def display_score():
     """
@@ -175,7 +178,6 @@ def display_score():
     # Display the current score
     score_text = font.render(f"Score: {score}", True, WHITE)
     screen.blit(score_text, (10, 10))
-
     # Display the leaderboard
     leaderboard = read_leaderboard()
     y_offset = 50
@@ -184,23 +186,19 @@ def display_score():
         screen.blit(high_score_text, (10, y_offset))
         y_offset += 30
 
-
 def display_name_input():
     """
     Display a text input box for the user to enter their name.
     """
     global player_name
-
     input_box = pygame.Rect(SCREEN_WIDTH // 2 - 150, SCREEN_HEIGHT // 2 - 25, 300, 50)
     active = True
     color = GRAY
-
     while active:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     active = False
@@ -208,19 +206,15 @@ def display_name_input():
                     player_name = player_name[:-1]
                 else:
                     player_name += event.unicode
-
         # Draw input box and name
         screen.fill(BLACK)
         pygame.draw.rect(screen, color, input_box)
         text_surface = font.render(player_name, True, WHITE)
         screen.blit(text_surface, (input_box.x + 10, input_box.y + 10))
-
         prompt = font.render("Enter your name and press Enter:", True, WHITE)
         screen.blit(prompt, (SCREEN_WIDTH // 2 - 200, SCREEN_HEIGHT // 2 - 80))
-
         pygame.display.flip()
         clock.tick(FPS)
-
 
 def display_game_over():
     """
@@ -229,34 +223,24 @@ def display_game_over():
     screen.fill(BLACK)
     game_over_text = large_font.render("Game Over!", True, WHITE)
     screen.blit(game_over_text, (SCREEN_WIDTH // 2 - 150, SCREEN_HEIGHT // 2 - 50))
-
     leaderboard = read_leaderboard()
     y_offset = SCREEN_HEIGHT // 2 + 50
     for i, (name, high_score) in enumerate(leaderboard, start=1):
         high_score_text = font.render(f"{i}. {name}: {high_score}", True, WHITE)
         screen.blit(high_score_text, (SCREEN_WIDTH // 2 - 100, y_offset))
         y_offset += 30
-
     pygame.display.flip()
     pygame.time.wait(5000)  # Wait 5 seconds before exiting
-
 
 # Game Functionality
 def game_loop():
     global move_left, move_right, move_up, move_down, obstacles, running, score
-
     spawn_timer = 0
-    running = True
-    score = 0
-
     while running:
-        # Handle events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-
-            # Handle key press events
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     move_left = True
@@ -266,8 +250,6 @@ def game_loop():
                     move_up = True
                 if event.key == pygame.K_DOWN:
                     move_down = True
-
-            # Handle key release events
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT:
                     move_left = False
@@ -278,12 +260,11 @@ def game_loop():
                 if event.key == pygame.K_DOWN:
                     move_down = False
 
-        # Update game state
         update_player_position()
 
         # Spawn obstacles periodically
         spawn_timer += 1
-        if spawn_timer > 30:  # Adjust spawn rate
+        if spawn_timer >= 60:
             obstacles.append(spawn_obstacle())
             spawn_timer = 0
 
@@ -293,21 +274,18 @@ def game_loop():
         # Increase score over time
         score += 1
 
-        # Draw everything
         draw_game_objects()
         display_score()
-
-        # Update the display
         pygame.display.flip()
 
-        # Cap the frame rate
         clock.tick(FPS)
 
-    # Save the score and display a game-over screen
-    save_score(player_name, score)
-    display_game_over()
-
-
-# Run the game
+# Ask for player name at the beginning
 display_name_input()
+
+# Start the game loop
 game_loop()
+
+# When game over
+save_score(player_name, score)
+display_game_over()
