@@ -15,6 +15,7 @@
 https://dev.to/lovelacecoding/how-to-build-your-first-python-game-a-step-by-step-guide-to-creating-a-simple-shooter-with-pygame-f0k#:~:text=How%20to%20Build%20Your%20First%20Python%20Game%3A%20A,Enemies%20...%205%20Step%205%3A%20Detecting%20Collisions%20
 https://blog.devgenius.io/a-step-by-step-guide-to-creating-a-python-game-with-pygame-a-step-by-step-guide-to-creating-a-4c89f81fe7e0
 https://www.remove.bg/upload
+https://youtu.be/gpl64Tk9oeM?si=S0pjWiOUKkgYfaSZ - Music
 
 ---
 
