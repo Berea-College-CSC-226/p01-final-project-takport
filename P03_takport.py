@@ -1,15 +1,3 @@
-######################################################################
-# Author(s): Tobore Takpor
-# Username(s): takport
-#
-# Assignment: Final Project
-#
-# Purpose: To create an interactive video game for users to play
-#
-######################################################################
-# Acknowledgements:
-
-
 import pygame
 import random
 import sys
@@ -41,9 +29,17 @@ pygame.display.set_caption("Car Dodge Game")
 # Clock for controlling the frame rate
 clock = pygame.time.Clock()
 
+# Load Background Image
+try:
+    background_image = pygame.image.load("background.png")
+    background_image = pygame.transform.scale(background_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
+except FileNotFoundError:
+    print("Error: 'background.png' not found. Using a black screen as background.")
+    background_image = None  # Fallback if no background is available
+
 # Load Car Image or Use Placeholder
 try:
-    car_image = pygame.image.load("car.png")  # Replace with your car image file path
+    car_image = pygame.image.load("car.png")  # Replace with car image in file path
     car_width = 50
     car_height = 100
     car_image = pygame.transform.scale(car_image, (car_width, car_height))
@@ -164,10 +160,14 @@ def update_obstacles():
 
 
 def draw_game_objects():
-    screen.fill(BLACK)
-    screen.blit(car_image, (player_rect.x, player_rect.y))
+    if background_image:
+        screen.blit(background_image, (0, 0))  # Draw the background
+    else:
+        screen.fill(BLACK)  # Fallback to a black screen if the background is missing
+
+    screen.blit(car_image, (player_rect.x, player_rect.y))  # Draw the player car
     for obs in obstacles:
-        screen.blit(truck_image, (obs["x"], obs["y"]))
+        screen.blit(truck_image, (obs["x"], obs["y"]))  # Draw the obstacles
 
 
 def display_score():
