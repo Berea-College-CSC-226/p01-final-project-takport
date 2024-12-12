@@ -1,3 +1,15 @@
+######################################################################
+# Author(s): Tobore Takpor
+# Username(s): takport
+#
+# Assignment: Final Project
+#
+# Purpose: To create an interactive video game for users to play
+#
+######################################################################
+# Acknowledgements:
+
+
 import pygame
 import random
 import sys

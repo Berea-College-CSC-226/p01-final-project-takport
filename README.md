@@ -2,9 +2,6 @@
 
 ## Instructions
 
-️Exclamation Marks ❗️indicate action items; you should remove these emoji as you complete/update the items which 
-  they accompany. (This means that your final README should have no ❗️in it!)
-
 ️**Author(s)**: Tobore Takpor
 
 ️**Google Doc Link**: https://docs.google.com/document/d/1GyYdQqHJCr5xH80ElDsX9l0mIo6yo7szI-a608zeVEY/edit?usp=sharing
@@ -14,8 +11,12 @@
 ## References 
 https://dev.to/lovelacecoding/how-to-build-your-first-python-game-a-step-by-step-guide-to-creating-a-simple-shooter-with-pygame-f0k#:~:text=How%20to%20Build%20Your%20First%20Python%20Game%3A%20A,Enemies%20...%205%20Step%205%3A%20Detecting%20Collisions%20
 https://blog.devgenius.io/a-step-by-step-guide-to-creating-a-python-game-with-pygame-a-step-by-step-guide-to-creating-a-4c89f81fe7e0
-https://www.remove.bg/upload
+https://www.remove.bg/upload - Background Remover
 https://youtu.be/gpl64Tk9oeM?si=S0pjWiOUKkgYfaSZ - Music
+https://stackoverflow.com/questions/43845800/how-do-i-add-background-music-to-my-python-game
+https://www.codewithc.com/adding-sound-effects-and-music-to-your-pygame-project/
+https://www.techwithtim.net/tutorials/game-development-with-python/pygame-tutorial/pygame-tutorial-movement
+https://www.codingal.com/coding-for-kids/blog/build-gui-games-in-python/
 
 ---
 
@@ -32,7 +33,6 @@ https://youtu.be/gpl64Tk9oeM?si=S0pjWiOUKkgYfaSZ - Music
 ![CRC Card-2.png](CRC%20Card-2.png)
 ![CRC Card-3.png](CRC%20Card-3.png)  
 
-️**Branches**: This project will **require** effective use of git. 
 
 Each partner should create a branch at the beginning of the project, and stay on this branch (or branches of their 
 branch) as they work. When you need to bring each others branches together, do so by merging each other's branches 
@@ -46,7 +46,6 @@ into your own, following the process we've discussed in previous assignments:
 
 ## Milestone 2: Code Setup and Issue Queue
 
-Most importantly, keep your issue queue up to date, and focus on your code. 🙃
 
 Reflect on what you’ve done so far. How’s it going? Are you feeling behind/ahead? What are you worried about? 
 What has surprised you so far? Describe your general feelings. Be honest with yourself; this section is for you, not me.
@@ -85,16 +84,26 @@ Indicate what percentage of the project you have left to complete and how confid
 
 ## Milestone 4: Final Code, Presentation, Demo
 
-### ❗User Instructions
+### User Instructions
 In a paragraph, explain how to use your program. Assume the user is starting just after they hit the "Run" button 
 in PyCharm. 
+```
+To use this program, start by waiting for the "Enter Your Name" prompt to appear on the screen. This is where you 
+will input your name to be displayed on the leaderboard. Type in your name using your keyboard, and then press the 
+"Enter" key to submit it. Once you've entered your name, the game will begin. You will see a car at the bottom of 
+the screen, and trucks will start moving across the screen from either side. Use the arrow keys on your keyboard 
+to move the car left and right, avoiding the trucks as they move across the screen. The game will continue until 
+you collide with a truck, at which point the game will end and your score will be displayed on the screen. Music 
+will also play while the game runs, until you collide with the truck. Your score will also be added to the leaderboard, 
+which will be displayed on the screen for a few seconds before the game window closes.
 
-### ❗Errors and Constraints
+```
+### Errors and Constraints
 Every program has bugs or features that had to be scrapped for time. These bugs should be tracked in the issue queue. 
 You should already have a few items in here from the prior weeks. Create a new issue for any undocumented errors and 
 deficiencies that remain in your code. Bugs found that aren't acknowledged in the queue will be penalized.
 
-### ❗Reflection
+### Reflection
 In three to four well-written paragraphs, address the following (at a minimum):
 - Why did you select the project that you did?
 - How closely did your final project reflect your initial design?
